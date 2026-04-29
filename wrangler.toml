@@ -1,0 +1,21 @@
+name = "dvwa-lab"
+main = "src/index.ts"
+compatibility_date = "2026-02-20"
+
+# STEP 1: After running `wrangler login`, replace YOUR_ACCOUNT_ID below
+# with your real Cloudflare Account ID (found in dash.cloudflare.com)
+[[containers]]
+class_name = "DvwaContainer"
+image = "registry.cloudflare.com/59fe37fe33b93ac0826c3f2ea7aa4c50/custom-dvwa:v1"
+
+routes = [
+  { pattern = "dvwa.lk-safeproject.cftenant.com", custom_domain = true }
+]
+
+[[durable_objects.bindings]]
+name = "DVWA_CONTAINER"
+class_name = "DvwaContainer"
+
+[[migrations]]
+tag = "v1"
+new_sqlite_classes = ["DvwaContainer"]
